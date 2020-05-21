@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const version = '1.0';
+const version = '1.0.1';
 
 const Renderer = () => {
   const canvasRef = React.useRef(null);
@@ -24,6 +24,7 @@ const Renderer = () => {
   return (
     <canvas
       ref={canvasRef}
+      style={{touchAction: 'none'}}
       width={window.innerWidth}
       height={window.innerHeight}
       onMouseMove={(e) => {
