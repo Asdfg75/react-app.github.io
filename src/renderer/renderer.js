@@ -13,6 +13,20 @@ const Renderer = () => {
     ctx.fillRect(x - 1, y - 1, 3, 3);
   };
 
+  const handleMove = (e) => {
+    if (e.buttons === 1) {
+      draw(e.clientX, e.clientY);
+    }
+  }
+
+  const handleTouch = (e) => {
+    const touches = e.touches;
+    for (let i = 0; i < touches.length; i++) {
+      const t = touches[i];
+      draw(t.pageX, t.pageY);
+    }
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -24,17 +38,11 @@ const Renderer = () => {
   return (
     <canvas
       ref={canvasRef}
-      style={{touchAction: 'none'}}
+      style={{ touchAction: 'none' }}
       width={window.innerWidth}
       height={window.innerHeight}
-      onMouseMove={(e) => {
-        if (e.buttons === 1) {
-          draw(e.clientX, e.clientY);
-        }
-      }}
-      onTouchMove={(e) => {
-        draw(e.clientX, e.clientY);
-      }}
+      onMouseMove={handleMove}
+      onTouchMove={handleTouch}
     />
   );
 };
